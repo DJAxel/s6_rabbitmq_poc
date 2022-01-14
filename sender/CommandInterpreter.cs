@@ -39,6 +39,7 @@ namespace sender
                 return false;
             }
             words[0] = words[0].Trim().ToLower();
+            words[1] = words[1].Trim();
             if(words[0] == "add") {
                 this._messageSender.send("add:" + words[1]);
             }

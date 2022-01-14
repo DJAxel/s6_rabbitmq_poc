@@ -12,6 +12,7 @@ namespace sender
 
             Console.WriteLine("Welcome to my user frontend!");
             while(true) {
+                Console.WriteLine();
                 Console.WriteLine("What can I do for you? 'add:<name>' or 'delete:<name>' or 'exit'");
                 String command = Console.ReadLine();
                 if(commandInterpreter.execute(command) == true) {
