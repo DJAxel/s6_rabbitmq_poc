@@ -18,7 +18,10 @@ namespace receiver
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                channel.QueueDeclare(queue: "users", durable: true, exclusive: false, autoDelete: false, arguments: null);
+                channel.ExchangeDeclare(exchange: "users", type: ExchangeType.Fanout);
+
+                var queueName = channel.QueueDeclare().QueueName;
+                channel.QueueBind(queue: queueName, exchange: "users", routingKey: "");
 
                 var consumer = new EventingBasicConsumer(channel);
                 consumer.Received += (model, ea) =>
@@ -30,7 +33,7 @@ namespace receiver
                     Console.WriteLine();
                     printCurrentDatabaseTable();
                 };
-                channel.BasicConsume(queue: "users", autoAck: true, consumer: consumer);
+                channel.BasicConsume(queue: queueName, autoAck: true, consumer: consumer);
 
                 Console.WriteLine(" Press [enter] to exit.");
                 Console.ReadLine();
