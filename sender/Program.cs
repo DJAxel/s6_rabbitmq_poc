@@ -1,7 +1,4 @@
 ﻿using System;
-using RabbitMQ.Client;
-using System.Text;
-using System.Threading;
 
 namespace sender
 {
@@ -11,13 +8,16 @@ namespace sender
 
         static void Main(string[] args)
         {
-            MessageSender messageSender = MessageSender.Instance;
-            messageSender.startSending();
+            CommandInterpreter commandInterpreter = CommandInterpreter.Instance;
 
-            Console.WriteLine(" Press [enter] to exit.");
-            Console.WriteLine("");
-            Console.ReadLine();
-            messageSender.stopSending();
+            Console.WriteLine("Welcome to my user frontend!");
+            while(true) {
+                Console.WriteLine("What can I do for you? 'add:<name>' or 'delete:<name>' or 'exit'");
+                String command = Console.ReadLine();
+                if(commandInterpreter.execute(command) == true) {
+                    break;
+                }
+            }
         }
     }
 }
