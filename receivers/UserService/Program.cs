@@ -18,10 +18,10 @@ namespace UserService
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                channel.ExchangeDeclare(exchange: "users", type: ExchangeType.Fanout);
+                channel.ExchangeDeclare(exchange: "users_topic", type: ExchangeType.Topic);
 
                 var queueName = channel.QueueDeclare().QueueName;
-                channel.QueueBind(queue: queueName, exchange: "users", routingKey: "");
+                channel.QueueBind(queue: queueName, exchange: "users_topic", routingKey: "users.*");
 
                 var consumer = new EventingBasicConsumer(channel);
                 consumer.Received += (model, ea) =>

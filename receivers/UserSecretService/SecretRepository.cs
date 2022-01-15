@@ -51,5 +51,13 @@ namespace UserSecretService
         {
             return this.secretList.ToArray();
         }
+
+        internal void Seed()
+        {
+            String[] names = new String[] {"Axel", "Brad", "Charlie", "Donna", "Evita"};
+            foreach (string name in names) {
+                this.add(name);
+            }
+        }
     }
 }

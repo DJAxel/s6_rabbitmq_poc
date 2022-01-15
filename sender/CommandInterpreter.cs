@@ -41,10 +41,10 @@ namespace sender
             words[0] = words[0].Trim().ToLower();
             words[1] = words[1].Trim();
             if(words[0] == "add") {
-                this._messageSender.send("add:" + words[1]);
+                this._messageSender.send("add:" + words[1], "add");
             }
             if(words[0] == "delete") {
-                this._messageSender.send("delete:" + words[1]);
+                this._messageSender.send("delete:" + words[1], "delete");
             }
             return false;
         }
