@@ -1,11 +1,11 @@
 using System;
 
-namespace UserService
+namespace UserSecretService
 {
     public sealed class CommandInterpreter
     {
         private static CommandInterpreter instance = null;
-        private UserRepository _userRepository = null;
+        private SecretRepository _secretService = null;
 
         public static CommandInterpreter Instance
         {
@@ -21,7 +21,7 @@ namespace UserService
 
         CommandInterpreter()
         {
-            this._userRepository = UserRepository.Instance;
+            this._secretService = SecretRepository.Instance;
         }
 
         internal String execute(string command)
@@ -31,10 +31,10 @@ namespace UserService
             if(words.Length >= 2) {
                 words[0] = words[0].Trim().ToLower();
                 if(words[0] == "add") {
-                    return this._userRepository.add(words[1]);
+                    return this._secretService.add(words[1]);
                 }
                 if(words[0] == "delete") {
-                    return this._userRepository.delete(words[1]);
+                    return this._secretService.delete(words[1]);
                 }
             }
             return string.Format("Invalid command received: {0}", command);

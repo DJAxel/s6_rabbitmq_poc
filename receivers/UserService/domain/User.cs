@@ -1,6 +1,6 @@
 using Faker;
 
-namespace receiver.domain
+namespace UserService.domain
 {
     public class User
     {

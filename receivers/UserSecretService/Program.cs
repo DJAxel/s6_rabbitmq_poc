@@ -1,12 +1,11 @@
-﻿using System.Globalization;
-using System;
+﻿using System;
 using System.Text;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using ConsoleTables;
-using UserService.domain;
+using UserSecretService.domain;
 
-namespace UserService
+namespace UserSecretService
 {
     class Program
     {
@@ -45,13 +44,13 @@ namespace UserService
             Console.WriteLine("This is what the current database looks like:");
             Console.WriteLine();
 
-            UserRepository userRepository = UserRepository.Instance;
-            var table = new ConsoleTable("name", "age", "city");
-            User[] users = userRepository.getAll();
+            SecretRepository secretRepository = SecretRepository.Instance;
+            var table = new ConsoleTable("User's name", "secret");
+            UserSecret[] secrets = secretRepository.getAll();
 
-            foreach (User user in users)
+            foreach (UserSecret secret in secrets)
             {
-                table.AddRow(user.Name, user.Age, user.City);
+                table.AddRow(secret.User.Name, secret.Secret);
             }
 
             table.Write();
